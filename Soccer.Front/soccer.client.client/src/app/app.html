@@ -1,0 +1,146 @@
+<div class="container">
+
+  <header class="header">
+    <h1>Soccer — Gestión de equipos</h1>
+    <p>Administración de países</p>
+  </header>
+
+  <main>
+
+    <div class="section-header">
+
+      <h2>Países</h2>
+
+      @if (!showForm) {
+      <button type="button"
+              class="btn-primary"
+              (click)="openCreateForm()">
+        + Agregar país
+      </button>
+      }
+
+    </div>
+
+    @if (successMessage) {
+    <div class="message success">
+      {{ successMessage }}
+    </div>
+    }
+
+    @if (errorMessage) {
+    <div class="message error">
+      {{ errorMessage }}
+    </div>
+    }
+
+    @if (showForm) {
+
+    <div class="form-card">
+
+      @if (editingCountryId === null) {
+      <h3>Agregar país</h3>
+      } @else {
+      <h3>Editar país</h3>
+      }
+
+      <label for="countryName">
+        Nombre del país
+      </label>
+
+      <input id="countryName"
+             type="text"
+             [(ngModel)]="countryName"
+             placeholder="Ej. Argentina"
+             (keyup.enter)="saveCountry()">
+
+      <div class="form-actions">
+
+        <button type="button"
+                class="btn-primary"
+                (click)="saveCountry()">
+
+          @if (editingCountryId === null) {
+          Guardar
+          } @else {
+          Actualizar
+          }
+
+        </button>
+
+        <button type="button"
+                class="btn-secondary"
+                (click)="cancelForm()">
+          Cancelar
+        </button>
+
+      </div>
+
+    </div>
+
+    }
+
+    @if (countries.length > 0) {
+
+    <div class="countries-list">
+
+      @for (country of countries; track country.id) {
+
+      <div class="country-card">
+
+        <div class="country-info">
+
+          <h3>{{ country.name }}</h3>
+
+          @if (country.enabled) {
+          <span class="status active">
+            Activo
+          </span>
+          } @else {
+          <span class="status inactive">
+            Inactivo
+          </span>
+          }
+
+        </div>
+
+        <div class="country-actions">
+
+          <span class="country-id">
+            ID: {{ country.id }}
+          </span>
+
+          <button type="button"
+                  class="btn-edit"
+                  (click)="openEditForm(country)">
+            Editar
+          </button>
+
+          <button type="button"
+                  class="btn-delete"
+                  (click)="deleteCountry(country)">
+            Eliminar
+          </button>
+
+        </div>
+
+      </div>
+
+      }
+
+    </div>
+
+    } @else {
+
+    <div class="empty-state">
+      <p>No hay países registrados.</p>
+    </div>
+
+    }
+
+  </main>
+
+  <hr>
+
+  <app-teams></app-teams>
+
+</div>

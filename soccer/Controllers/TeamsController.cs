@@ -19,7 +19,7 @@ public class TeamsController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<Team>>> GetTeams()
+    public async Task<ActionResult<IEnumerable<object>>> GetTeams()
     {
         var teams = await _context.Teams
             .Include(t => t.Country)

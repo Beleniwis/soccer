@@ -3,16 +3,6 @@ using Soccer.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddCors(options =>
-{
-    options.AddPolicy("Angular", policy =>
-    {
-        policy
-            .WithOrigins("https://localhost:52965")
-            .AllowAnyHeader()
-            .AllowAnyMethod();
-    });
-});
 builder.Services.AddControllers();
 
 builder.Services.AddCors(options =>
