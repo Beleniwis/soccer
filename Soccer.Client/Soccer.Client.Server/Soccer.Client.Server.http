@@ -1,6 +1,0 @@
-@Soccer.Client.Server_HostAddress = http://localhost:5094
-
-GET {{Soccer.Client.Server_HostAddress}}/weatherforecast/
-Accept: application/json
-
-###
