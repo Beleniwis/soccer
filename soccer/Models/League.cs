@@ -1,4 +1,6 @@
-﻿namespace Soccer.Models;
+﻿using System.Text.Json.Serialization;
+
+namespace Soccer.Models;
 
 public class League
 {
@@ -17,6 +19,9 @@ public class League
     public DateTime CreatedAt { get; set; }
 
     public Country Country { get; set; } = null!;
+
+    [JsonIgnore]
+    public ICollection<League> Leagues { get; set; } = new List<League>();
 
     public ICollection<TeamLeague> TeamLeagues { get; set; } = new List<TeamLeague>();
 }

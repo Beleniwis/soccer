@@ -1,5 +1,4 @@
 ﻿using System.ComponentModel.DataAnnotations;
-
 namespace Soccer.DTOs;
 
 public class CreateCountryDto

@@ -22,9 +22,9 @@ public class TeamsController : ControllerBase
     public async Task<ActionResult<IEnumerable<object>>> GetTeams()
     {
         var teams = await _context.Teams
-            .Include(t => t.Country)
-            .Where(t => t.Enabled)
-            .ToListAsync();
+     .Include(t => t.Country)
+     .Where(t => t.Enabled)
+     .ToListAsync();
 
         return Ok(teams);
     }

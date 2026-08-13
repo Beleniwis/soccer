@@ -1,4 +1,5 @@
-﻿
+﻿using System.Text.Json.Serialization;
+
 namespace Soccer.Models;
 
 public class Country
@@ -13,5 +14,6 @@ public class Country
 
     public ICollection<Team> Teams { get; set; } = new List<Team>();
 
-    public ICollection<League> Leagues { get; set; } = new List<League>();
+    [JsonIgnore]
+public ICollection<League> Leagues { get; set; } = new List<League>();
 }

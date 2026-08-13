@@ -39,15 +39,25 @@ public class CountriesController : ControllerBase
                 "El nombre debe tener al menos 2 letras y solo puede contener letras, espacios, guiones o apóstrofes.");
         }
 
-        var exists = await _context.Countries
-            .AnyAsync(c => c.Name.ToLower() == name.ToLower());
+        var country = await _context.Countries
+            .FirstOrDefaultAsync(c =>
+                c.Name.ToLower() == name.ToLower());
 
-        if (exists)
+        if (country != null)
         {
-            return Conflict("Ya existe un país con ese nombre.");
+            if (country.Enabled)
+            {
+                return Conflict("Ya existe un país con ese nombre.");
+            }
+
+            country.Enabled = true;
+
+            await _context.SaveChangesAsync();
+
+            return Ok(country);
         }
 
-        var country = new Country
+        country = new Country
         {
             Name = name,
             Enabled = true,
@@ -80,8 +90,8 @@ public class CountriesController : ControllerBase
 
     [HttpPut("{id}")]
     public async Task<ActionResult> UpdateCountry(
-    int id,
-    CreateCountryDto dto)
+        int id,
+        CreateCountryDto dto)
     {
         var country = await _context.Countries
             .FirstOrDefaultAsync(c => c.Id == id);
@@ -95,7 +105,8 @@ public class CountriesController : ControllerBase
 
         if (string.IsNullOrWhiteSpace(name) || name.Length < 2)
         {
-            return BadRequest("El nombre debe tener al menos 2 caracteres.");
+            return BadRequest(
+                "El nombre debe tener al menos 2 caracteres.");
         }
 
         var exists = await _context.Countries
@@ -105,7 +116,8 @@ public class CountriesController : ControllerBase
 
         if (exists)
         {
-            return Conflict("Ya existe otro país con ese nombre.");
+            return Conflict(
+                "Ya existe otro país con ese nombre.");
         }
 
         country.Name = name;
@@ -114,6 +126,7 @@ public class CountriesController : ControllerBase
 
         return NoContent();
     }
+
     [HttpDelete("{id}")]
     public async Task<ActionResult> DeleteCountry(int id)
     {
