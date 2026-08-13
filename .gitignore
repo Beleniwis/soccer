@@ -1,0 +1,26 @@
+# Visual Studio
+.vs/
+*.user
+*.suo
+
+# .NET
+bin/
+obj/
+
+# Angular / Node
+node_modules/
+dist/
+.angular/
+.cache/
+
+# Logs
+*.log
+
+# Certificados y archivos locales
+*.pfx
+*.pem
+*.key
+
+# Sistema operativo
+.DS_Store
+Thumbs.db

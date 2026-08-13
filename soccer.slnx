@@ -1,0 +1,8 @@
+<Solution>
+  <Project Path="Soccer.Client/soccer.client.client/soccer.client.client.esproj">
+    <Build />
+    <Deploy />
+  </Project>
+  <Project Path="Soccer.Client/Soccer.Client.Server/Soccer.Client.Server.csproj" Id="863eb3cf-e414-45c6-9d1d-a28a69c88185" />
+  <Project Path="soccer/soccer.csproj" />
+</Solution>

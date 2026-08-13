@@ -1,0 +1,35 @@
+<div class="container">
+
+  <h1>Soccer</h1>
+
+  <h2>Países</h2>
+
+  <p>
+    Loading: {{ loading }}
+  </p>
+
+  <p>
+    Cantidad de países: {{ countries.length }}
+  </p>
+
+  <p *ngIf="error">
+    Error: {{ error }}
+  </p>
+
+  <div *ngFor="let country of countries">
+    <p>
+      ID: {{ country.id }}
+    </p>
+
+    <p>
+      Nombre: {{ country.name }}
+    </p>
+
+    <p>
+      Estado: {{ country.enabled ? 'Activo' : 'Inactivo' }}
+    </p>
+
+    <hr>
+  </div>
+
+</div>
